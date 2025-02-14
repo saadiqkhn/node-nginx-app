@@ -39,7 +39,7 @@ pipeline {
                 sh '''
                 docker stop node-nginx-app || true
                 docker rm node-nginx-app || true
-                docker run -d -p 8080:80 --name node-nginx-app $DOCKER_IMAGE
+                docker run -d -p 80:80 --name node-nginx-app $DOCKER_IMAGE
                 '''
             }
         }
