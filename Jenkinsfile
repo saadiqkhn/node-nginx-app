@@ -6,12 +6,13 @@ pipeline {
         DOCKER_CREDENTIALS = "docker-hub-credentials"
     }
 
-    stage('Clone Repository') {
-             steps {
-               git branch: 'main', url: 'https://github.com/saadiqkhn/node-nginx-app.git'
-             }
-        }
+    stages { 
 
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/saadiqkhn/node-nginx-app.git'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -22,9 +23,8 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([string(credentialsId: "docker-hub-password", variable: 'DOCKER_PAT')]) {
-                sh 'echo $DOCKER_PAT | docker login -u saadiqkhn --password-stdin'
-            }
-
+                    sh 'echo $DOCKER_PAT | docker login -u saadiqkhn --password-stdin'
+                }
             }
         }
 
@@ -43,6 +43,7 @@ pipeline {
                 '''
             }
         }
-    }
+    }  
 }
+
 
