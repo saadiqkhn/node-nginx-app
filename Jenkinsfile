@@ -6,12 +6,12 @@ pipeline {
         DOCKER_CREDENTIALS = "docker-hub-credentials"
     }
 
-    stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/saadiqkhn/node-nginx-app.git'
-            }
+    stage('Clone Repository') {
+             steps {
+               git branch: 'main', url: 'https://github.com/saadiqkhn/node-nginx-app.git'
+             }
         }
+
 
         stage('Build Docker Image') {
             steps {
