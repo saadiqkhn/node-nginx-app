@@ -8,10 +8,12 @@ pipeline {
     stages { 
 
         stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/saadiqkhn/node-nginx-app.git'
-            }
+    steps {
+        withCredentials([string(credentialsId: 'github-pat', variable: 'GITHUB_PAT')]) {
+            sh 'git clone https://$GITHUB_PAT@github.com/saadiqkhn/node-nginx-app.git'
         }
+    }
+}
 
         stage('Build and Push Docker Images') {
             steps {
